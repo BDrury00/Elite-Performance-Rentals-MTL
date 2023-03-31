@@ -1,3 +1,35 @@
+const fs = require("fs");
+const path = require("path");
+
+// to get an array of all the file names in a specific directory:
+const audiImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/audi-r8/Images")
+);
+
+const lamboCountachImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/lamborghini-countach/Images")
+);
+
+const lamboUrusImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/lamborghini-urus/Images")
+);
+
+const mcLarenImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/mclaren-765LT-spider/Images")
+);
+
+const noviFerrariImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/novitec-ferrari-SF90-spider/Images")
+);
+
+const porscheImgs = fs.readdirSync(
+  path.join(__dirname, "./Images/cars4rent/porsche-cayman-GTS/Images")
+);
+//
+
+//
+
+// data for cars
 const cars = [
   {
     _id: "R8",
@@ -5,8 +37,8 @@ const cars = [
     make: "Audi",
     model: "R8",
     dailyRate: 450,
-    pictures: [],
-    isAvailable: true,
+    cutoutImage: "",
+    allImages: audiImgs,
   },
   {
     _id: "Countach",
@@ -14,8 +46,8 @@ const cars = [
     make: "Lamborghini",
     model: "Countach LPI 800-4",
     dailyRate: 875,
-    pictures: [],
-    isAvailable: true,
+    cutoutImage: "",
+    allImages: lamboCountachImgs,
   },
   {
     _id: "Urus",
@@ -23,8 +55,8 @@ const cars = [
     make: "Lamborghini",
     model: "Urus",
     dailyRate: 350,
-    pictures: [],
-    isAvailable: true,
+    cutoutImage: "",
+    allImages: lamboUrusImgs,
   },
   {
     _id: "765LT-Spider",
@@ -32,8 +64,8 @@ const cars = [
     make: "McLaren",
     model: "765LT Spider",
     dailyRate: 750,
-    pictures: [],
-    isAvailable: true,
+    cutoutImage: "",
+    allImages: mcLarenImgs,
   },
   {
     _id: "SF90-Spider",
@@ -41,8 +73,8 @@ const cars = [
     make: "Novitec Ferrari",
     model: "SF90 Spider",
     dailyRate: 900,
-    pictures: [],
-    isAvailable: true,
+    cutoutImage: "",
+    allImages: noviFerrariImgs,
   },
   {
     _id: "Cayman-GTS",
@@ -50,11 +82,12 @@ const cars = [
     make: "Porsche",
     model: "Cayman GTS",
     dailyRate: 350,
-    pictures: [],
-    isAvailable: false, // assuming that the car is in the repair shop as it is a rental service some cars may need to be unavailable during these repairs
+    cutoutImage: "",
+    allImages: porscheImgs,
   },
 ];
 
+// reservation data
 const reservations = [
   {
     _id: "849ca5da-f812-4e30-93eb-7c56555b22ef",
@@ -73,14 +106,15 @@ const reservations = [
   },
 ];
 
+// user data
 const users = [
   {
-    _id: 1,
-    userNumber: 1,
-    name: "Luca Guy",
+    _id: "luca@gmail.com",
+    firstName: "Luca",
+    lastName: "Guy",
     email: "luca@gmail.com",
     password: "secretPassWord123",
-    reservation: "849ca5da-f812-4e30-93eb-7c56555b22ef",
+    reservations: ["849ca5da-f812-4e30-93eb-7c56555b22ef"],
   },
 ];
 
