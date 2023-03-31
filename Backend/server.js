@@ -6,6 +6,16 @@ const morgan = require("morgan");
 const app = express();
 const port = 8888;
 
+const {
+  getCars,
+  getCar,
+  getCarAvailability,
+  getUsers,
+  createReservation,
+  updateReservation,
+  deleteReservation,
+} = require("./handlers");
+
 // Below are methods that are included in express(). We chain them for convenience.
 // --------------------------------------------------------------------------------
 
@@ -22,6 +32,11 @@ app.use(express.static("public"));
 app.get("/test", (req, res) => {
   res.status(200).json({ message: "Server works!" });
 });
+
+app.get("/cars", getCars); // returns all cars
+app.get("/:carId", getCar); // view a specific car
+app.get("/cars/:carId/availability", getCarAvailability); // view a specific car availability
+app.post("cars/:carId/reserve", createReservation); // reserve a specific car
 // add new endpoints here ☝️
 // ---------------------------------
 // Nothing to modify below this line
@@ -34,5 +49,5 @@ app.get("*", (req, res) => {
   });
 });
 
-// Node spins up our server and sets it to listen on port 8000.
+// Node spins up our server and sets it to listen on port.
 app.listen(port, () => console.log(`Listening on port ${port}`));
