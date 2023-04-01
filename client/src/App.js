@@ -1,15 +1,44 @@
-import LoginButton from "./components/login&logout/LoginButton";
-import LogoutButton from "./components/login&logout/LogoutButton";
-import Profile from "./components/Profile";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Cars from "./pages/Cars";
+import SpecificCar from "./pages/SpecificCar";
+import Contact from "./pages/Contact";
+import Account from "./pages/Account";
+import Navbar from "./components/navbar/Navbar";
+import styled from "styled-components";
+
+//
+
+//
+
+//
 
 const App = () => {
   return (
-    <main>
-      <h1>Auth0 Login</h1>
-      <LoginButton />
-      <LogoutButton />
-    </main>
+    <BrowserRouter>
+      <Container>
+        <NavbarContainer>
+          <Navbar />
+        </NavbarContainer>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cars" element={<Cars />} />
+          <Route path="/cars/:id" element={<SpecificCar />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/account" element={<Account />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+  min-height: 100vh;
+`;
+
+const NavbarContainer = styled.div``;
 
 export default App;

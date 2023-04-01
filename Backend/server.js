@@ -1,6 +1,7 @@
 "use strict";
 
 // import the needed node_modules.
+const jwt = require("express-jwt"); // for auth0
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
@@ -37,6 +38,8 @@ app.get("/cars", getCars); // returns all cars
 app.get("/:carId", getCar); // view a specific car
 app.get("/cars/:carId/availability", getCarAvailability); // view a specific car availability
 app.post("cars/:carId/reserve", createReservation); // reserve a specific car
+
+app.get("endpoint for getting users data");
 // add new endpoints here ☝️
 // ---------------------------------
 // Nothing to modify below this line
