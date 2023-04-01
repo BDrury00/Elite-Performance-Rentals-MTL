@@ -38,6 +38,12 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const NavbarContainer = styled.div``;
+const NavbarContainer = styled.div`
+  margin-top: 10px;
+  max-width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10%;
+`;
 
 export default App;

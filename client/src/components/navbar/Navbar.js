@@ -14,7 +14,7 @@ const Navbar = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <nav>
+    <Nav>
       <UnorderedList>
         <li>
           <Link to="/">Home</Link>
@@ -23,21 +23,16 @@ const Navbar = () => {
           <Link to="/cars">Our Fleet</Link>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact">Contact Us</Link>
         </li>
-        {isAuthenticated && (
+        {isAuthenticated ? (
           <li>
             <Link to="/account">My Reservations</Link>
           </li>
-        )}
-        <li>
-          <LoginButton />
-        </li>
-        <li>
-          <LogoutButton />
-        </li>
+        ) : null}
+        <li>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</li>
       </UnorderedList>
-    </nav>
+    </Nav>
   );
 };
 
@@ -50,7 +45,13 @@ const UnorderedList = styled.ul`
 
   a {
     text-decoration: none;
+    color: white;
   }
+`;
+
+const Nav = styled.nav`
+  background-color: green;
+  color: white;
 `;
 
 export default Navbar;
