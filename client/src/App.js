@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import Account from "./pages/Account";
 import Navbar from "./components/navbar/Navbar";
 import styled from "styled-components";
-
+import GlobalStyle from "./components/GlobalStyle";
 //
 
 //
@@ -16,6 +16,7 @@ import styled from "styled-components";
 const App = () => {
   return (
     <BrowserRouter>
+      <GlobalStyle />
       <Container>
         <NavbarContainer>
           <Navbar />
@@ -35,8 +36,6 @@ const App = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: lightblue;
-  min-height: 100vh;
 `;
 
 const NavbarContainer = styled.div``;
