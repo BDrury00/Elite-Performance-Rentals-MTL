@@ -32,7 +32,30 @@ const getCars = async (req, res) => {
 };
 
 // get specific car by its id
-const getCar = async (req, res) => {};
+const getCar = async (req, res) => {
+  try {
+    const carId = req.params.carId;
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const collection = await db.collection("cars");
+    const car = await collection.findOne({ _id: carId });
+    client.close();
+    if (car) {
+      res.status(200).json({ status: 200, data: car });
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: `Car with ID ${carId} not found`,
+      });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({
+      status: 400,
+      message: "Error retrieving car from database.",
+    });
+  }
+};
 
 // find out how long specified car is reserved for to lockout option of reserving that car during reservation days
 const getCarAvailability = async (req, res) => {};
