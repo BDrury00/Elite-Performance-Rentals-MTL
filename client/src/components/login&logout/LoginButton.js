@@ -13,8 +13,11 @@ const LoginButton = () => {
 
 const Button = styled.button`
   background-color: transparent;
-  color: white;
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
   border: none;
+  cursor: pointer;
 `;
 
 export default LoginButton;

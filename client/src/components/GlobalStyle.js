@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   background-color: lightblue;
+  font-family: 'Oswald', sans-serif;
+  
 }
 
 `;

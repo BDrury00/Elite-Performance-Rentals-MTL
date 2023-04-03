@@ -45,13 +45,20 @@ const UnorderedList = styled.ul`
 
   a {
     text-decoration: none;
-    color: white;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 30px;
+    font-family: ;
   }
 `;
 
 const Nav = styled.nav`
-  background-color: green;
+  background-color: lightgrey;
   color: white;
+  padding: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
 `;
 
 export default Navbar;

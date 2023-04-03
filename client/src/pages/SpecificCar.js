@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const SpecificCar = () => {
   const [car, setCar] = useState(null);
@@ -26,6 +27,9 @@ const SpecificCar = () => {
         <h2>{car.full}</h2>
         <p>{car.description}</p>
         <p>Daily Rate: {car.dailyRate}</p>
+        <Link to={`/cars/${car._id}/reservation`}>
+          <button>Book Now</button>
+        </Link>
       </Right>
     </Wrapper>
   );

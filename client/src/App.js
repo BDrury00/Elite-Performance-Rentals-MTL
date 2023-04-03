@@ -5,6 +5,8 @@ import SpecificCar from "./pages/SpecificCar";
 import Contact from "./pages/Contact";
 import Account from "./pages/Account";
 import Navbar from "./components/navbar/Navbar";
+import Reservation from "./pages/Reservation";
+import Confirmation from "./pages/Confirmation";
 import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle";
 //
@@ -27,6 +29,8 @@ const App = () => {
           <Route path="/cars/:id" element={<SpecificCar />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/cars/:id/reservation" element={<Reservation />} />
+          <Route path="/confirm/:orderId" element={<Confirmation />} />
         </Routes>
       </Container>
     </BrowserRouter>
