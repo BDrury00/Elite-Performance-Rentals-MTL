@@ -68,8 +68,6 @@ const InfoButton = styled.button`
   padding: 12px;
   border-radius: 10px;
   font-size: 16px;
-  /* margin-top: 50px;
-  margin-bottom: 50px; */
 
   &:hover {
     cursor: pointer;
