@@ -17,7 +17,7 @@ const CarBoxes = ({ car }) => {
 const CarBoxWrapper = styled.div`
   background-color: lightgrey;
   border: 3px solid black;
-  max-width: 25%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,7 +26,8 @@ const CarBoxWrapper = styled.div`
 `;
 
 const CarImg = styled.img`
-  max-width: 400px;
+  max-width: 100%;
+  width: 400px;
 `;
 
 const InfoButton = styled.button``;

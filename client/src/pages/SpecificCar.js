@@ -21,7 +21,15 @@ const SpecificCar = () => {
   return (
     <Wrapper>
       <Left>
-        <CarImg src={car.cutoutImage} alt={car.full} />
+        <CarImgs>
+          {car.allImages.map((image, index) => (
+            <CarImg
+              key={index}
+              src={image}
+              alt={`${car.full} image ${index + 1}`}
+            />
+          ))}
+        </CarImgs>
       </Left>
       <Right>
         <h2>{car.full}</h2>
@@ -35,9 +43,17 @@ const SpecificCar = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 //
+
+const CarImgs = styled.div`
+  max-width: 600px;
+`;
 
 const CarImg = styled.img`
   max-width: 600px;
@@ -45,10 +61,19 @@ const CarImg = styled.img`
 
 //
 
-const Left = styled.div``;
+const Left = styled.div`
+  flex: 1;
+`;
 
 //
 
-const Right = styled.div``;
+const Right = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 200px;
+`;
 
 export default SpecificCar;
