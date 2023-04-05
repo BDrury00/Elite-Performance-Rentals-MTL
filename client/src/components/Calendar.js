@@ -7,15 +7,15 @@ import { useEffect, useState, useRef } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-const Calendar = () => {
+const Calendar = ({ range, setRange }) => {
   // state for date
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: "selection",
-    },
-  ]);
+  //   const [range, setRange] = useState([
+  //     {
+  //       startDate: new Date(),
+  //       endDate: addDays(new Date(), 7),
+  //       key: "selection",
+  //     },
+  //   ]);
   // state for opening and closing the calendar
   const [open, setOpen] = useState(false);
 

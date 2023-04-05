@@ -14,6 +14,18 @@ const SpecificCar = () => {
   const [car, setCar] = useState(null);
   const { id } = useParams();
 
+  // For Calendar
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+  //
+  //
+  //
+
   // Fetch to get car info for that specific car
   useEffect(() => {
     fetch(`/cars/${id}`)
@@ -43,7 +55,7 @@ const SpecificCar = () => {
         <h2>{car.full}</h2>
         <p>{car.description}</p>
         <p>Daily Rate: {car.dailyRate}</p>
-        <Calendar />
+        <Calendar range={range} setRange={setRange} />
         <Link to={`/cars/${car._id}/reserv`}>
           <button>Book Now</button>
         </Link>
