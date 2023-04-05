@@ -14,6 +14,7 @@ const { v4: uuidv4 } = require("uuid");
 // handler functions
 
 // get all the cars
+// get endpoint: "/cars"
 const getCars = async (req, res) => {
   try {
     await client.connect();
@@ -32,6 +33,7 @@ const getCars = async (req, res) => {
 };
 
 // get specific car by its id
+// get endpoint: "/cars/:carId"
 const getCar = async (req, res) => {
   try {
     const carId = req.params.carId;
@@ -58,7 +60,30 @@ const getCar = async (req, res) => {
 };
 
 // find out how long specified car is reserved for to lockout option of reserving that car during reservation days
-const getCarAvailability = async (req, res) => {};
+// get endpoint: "/cars/:carId/availability"
+const getCarAvailability = async (req, res) => {
+  try {
+    const carId = req.params.carId;
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const reservationsCollection = await db.collection("reservations");
+
+    const carsReservations = await reservationsCollection
+      .find({
+        carId: carId,
+      })
+      .toArray();
+    client.close();
+
+    // No need to handle if an array of reservations is empty as this just means the car is available at any date
+    res.status(200).json({ status: 200, carId: carId, data: carsReservations });
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: "Error retrieving reservation data for this car",
+    });
+  }
+};
 
 // get the users
 const getUsers = async (req, res) => {};

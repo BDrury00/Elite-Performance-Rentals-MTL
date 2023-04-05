@@ -54,7 +54,7 @@ const SpecificCar = () => {
       <Right>
         <h2>{car.full}</h2>
         <p>{car.description}</p>
-        <p>Daily Rate: {car.dailyRate}</p>
+        <p>Daily Rate: ${car.dailyRate}</p>
         <Calendar range={range} setRange={setRange} />
         <Link to={`/cars/${car._id}/reserv`}>
           <button>Book Now</button>

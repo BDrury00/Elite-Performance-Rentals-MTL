@@ -21,6 +21,7 @@ const cars = [
       "/assets/audi-r8/images/4.jpg",
       "/assets/audi-r8/images/5.jpg",
     ],
+    reservations: [],
   },
   {
     _id: "Countach",
@@ -39,6 +40,7 @@ const cars = [
       "/assets/lamborghini-countach/images/4.jpg",
       "/assets/lamborghini-countach/images/5.jpg",
     ],
+    reservations: [],
   },
   {
     _id: "Urus",
@@ -55,6 +57,7 @@ const cars = [
       "/assets/lamborghini-urus/images/2.jpg",
       "/assets/lamborghini-urus/images/3.jpg",
     ],
+    reservations: [],
   },
   {
     _id: "765LT-Spider",
@@ -71,6 +74,7 @@ const cars = [
       "/assets/mclaren-765LT-spider/images/2.jpg",
       "/assets/mclaren-765LT-spider/images/3.jpg",
     ],
+    reservations: [],
   },
   {
     _id: "SF90-Spider",
@@ -87,6 +91,7 @@ const cars = [
       "/assets/novitec-ferrari-SF90-spider/images/2.jpg",
       "/assets/novitec-ferrari-SF90-spider/images/3.jpg",
     ],
+    reservations: ["4d5c5719-fec1-45b6-8586-9720dc51499d"],
   },
   {
     _id: "Cayman-GTS",
@@ -103,6 +108,10 @@ const cars = [
       "/assets/porsche-cayman-GTS/images/2.jpg",
       "/assets/porsche-cayman-GTS/images/3.jpg",
     ],
+    reservations: [
+      "849ca5da-f812-4e30-93eb-7c56555b22ef",
+      "88847120-f011-48e8-9b34-b6588cf9b919",
+    ],
   },
 ];
 
@@ -111,7 +120,7 @@ const reservations = [
   {
     _id: "849ca5da-f812-4e30-93eb-7c56555b22ef",
     userId: "luca@gmail.com",
-    carId: 6,
+    carId: "Cayman-GTS",
     startDate: {
       day: 1,
       month: 4,
@@ -119,6 +128,36 @@ const reservations = [
     },
     endDate: {
       day: 6,
+      month: 4,
+      year: 2023,
+    },
+  },
+  {
+    _id: "88847120-f011-48e8-9b34-b6588cf9b919",
+    userId: "coolGuy@gmail.com",
+    carId: "Cayman-GTS",
+    startDate: {
+      day: 7,
+      month: 4,
+      year: 2023,
+    },
+    endDate: {
+      day: 16,
+      month: 4,
+      year: 2023,
+    },
+  },
+  {
+    _id: "4d5c5719-fec1-45b6-8586-9720dc51499d",
+    userId: "coolGuy@gmail.com",
+    carId: "SF90-Spider",
+    startDate: {
+      day: 7,
+      month: 4,
+      year: 2023,
+    },
+    endDate: {
+      day: 16,
       month: 4,
       year: 2023,
     },
@@ -134,6 +173,17 @@ const users = [
     email: "luca@gmail.com",
     password: "secretPassWord123",
     reservations: ["849ca5da-f812-4e30-93eb-7c56555b22ef"],
+  },
+  {
+    _id: "coolGuy@gmail.com",
+    firstName: "Cool",
+    lastName: "Guy",
+    email: "coolGuy@gmail.com",
+    password: "secretPassWord123",
+    reservations: [
+      "88847120-f011-48e8-9b34-b6588cf9b919",
+      "4d5c5719-fec1-45b6-8586-9720dc51499d",
+    ],
   },
 ];
 
