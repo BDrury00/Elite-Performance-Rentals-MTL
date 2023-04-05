@@ -32,7 +32,8 @@ const Calendar = () => {
   }, []);
 
   //
-
+  // calculate 32 days from start date to limit user to 32 day rentals at a time
+  const maxEndDate = addDays(range[0].startDate, 32);
   //
 
   //
@@ -59,6 +60,7 @@ const Calendar = () => {
             direction="vertical"
             className="calendarElement"
             minDate={new Date()} // find a way to change the min date dynamically based on the latest date in the mongoDb reservation collection
+            maxDate={maxEndDate}
           />
         )}
       </div>
