@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Calendar from "../components/Calendar";
+
+//
+
+//
+
+//
 
 const SpecificCar = () => {
   const [car, setCar] = useState(null);
   const { id } = useParams();
 
+  // Fetch to get car info for that specific car
   useEffect(() => {
     fetch(`/cars/${id}`)
       .then((res) => res.json())
@@ -35,7 +43,8 @@ const SpecificCar = () => {
         <h2>{car.full}</h2>
         <p>{car.description}</p>
         <p>Daily Rate: {car.dailyRate}</p>
-        <Link to={`/cars/${car._id}/reservation`}>
+        <Calendar />
+        <Link to={`/cars/${car._id}/reserv`}>
           <button>Book Now</button>
         </Link>
       </Right>

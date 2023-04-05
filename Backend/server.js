@@ -37,7 +37,7 @@ app.get("/test", (req, res) => {
 app.get("/cars", getCars); // returns all cars
 app.get("/cars/:carId", getCar); // view a specific car
 app.get("/cars/:carId/availability", getCarAvailability); // view a specific car availability
-app.post("cars/:carId/reserve", createReservation); // reserve a specific car
+app.post("cars/:carId/reserv", createReservation); // reserve a specific car
 
 app.get("endpoint for getting users data");
 // add new endpoints here ☝️
