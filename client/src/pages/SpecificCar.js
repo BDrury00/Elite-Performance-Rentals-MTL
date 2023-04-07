@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
+import { useAuth0 } from "@auth0/auth0-react";
+import UserInfo from "../components/login&logout/UserInfo";
 
 //
 
@@ -23,7 +25,10 @@ const SpecificCar = () => {
     },
   ]);
   //
+
   //
+  // get auth0 users credentials:
+
   //
 
   // Fetch to get car info for that specific car
@@ -56,7 +61,21 @@ const SpecificCar = () => {
         <p>{car.description}</p>
         <p>Daily Rate: ${car.dailyRate}</p>
         <Calendar range={range} setRange={setRange} />
-        <Link to={`/cars/${car._id}/reserv`}>
+        <Link
+          to={`/cars/${car._id}/reserv`}
+          onClick={() => {
+            fetch(`/cars/${car._id}/reserv`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                startDate: range[0].startDate,
+                endDate: range[0].endDate,
+              }),
+            });
+          }}
+        >
           <button>Book Now</button>
         </Link>
       </Right>

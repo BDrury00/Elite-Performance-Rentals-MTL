@@ -49,7 +49,6 @@ const UnorderedList = styled.ul`
     font-size: 20px;
     font-weight: bold;
     padding: 30px;
-    font-family: ;
   }
 `;
 
