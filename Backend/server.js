@@ -6,8 +6,6 @@ const morgan = require("morgan");
 const app = express();
 const port = 8888;
 
-// for auth0
-
 const {
   getCars,
   getCar,

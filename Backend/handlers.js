@@ -1,8 +1,5 @@
 "use strict";
 
-// Stuff for auth0 authentication
-const jwt = require("jsonwebtoken");
-
 // Mongo imports and setup
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
@@ -93,29 +90,27 @@ const createReservation = async (req, res) => {
   try {
     const _id = uuidv4();
     const carId = req.params.carId;
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      return res
-        .status(401)
-        .json({ message: "Authorization header is missing" });
-    }
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Decode token
-    const { email } = decoded;
-    const { startDate, endDate } = req.body;
-
+    const { email } = req.body;
+    const startDate = new Date(req.body.startDate);
+    const endDate = new Date(req.body.endDate);
     const reservation = {
       _id,
       email,
       carId,
-      startDate,
-      endDate,
+      startDate: startDate.toLocaleDateString("en-CA"),
+      endDate: endDate.toLocaleDateString("en-CA"),
     };
 
     await client.connect();
     const db = client.db("Elite-Performance-Rentals");
     const reservationsCollection = await db.collection("reservations");
     await reservationsCollection.insertOne(reservation);
+
+    const carsCollection = await db.collection("cars");
+    await carsCollection.updateOne(
+      { _id: carId },
+      { $push: { reservations: _id } }
+    );
 
     res.status(201).json({
       status: 201,
