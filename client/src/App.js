@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/cars/:id" element={<SpecificCar />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/confirm/:orderId" element={<Confirmation />} />
+          <Route path="/confirm/:reservationId" element={<Confirmation />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -12,8 +11,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 //
 
 const SpecificCar = () => {
+  const navigate = useNavigate();
   const [car, setCar] = useState(null);
   const { id } = useParams();
+  const [carLoading, setCarLoading] = useState(true);
+  const [reservationLoading, setReservationLoading] = useState(false);
 
   // For Calendar
   const [range, setRange] = useState([
@@ -31,30 +33,51 @@ const SpecificCar = () => {
 
   //
   // handler for reservations:
-  const handleReservation = () => {
-    fetch(`/cars/${car._id}/reserv`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: user.email,
-        startDate: range[0].startDate,
-        endDate: range[0].endDate,
-      }),
-    });
+  const handleReservation = async () => {
+    setReservationLoading(true);
+    try {
+      const response = await fetch(`/cars/${car._id}/reserv`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          startDate: range[0].startDate,
+          endDate: range[0].endDate,
+        }),
+      });
+
+      const data = await response.json();
+      setReservationLoading(false);
+      const reservationId = data.data._id;
+      navigate(`/confirm/${reservationId}`);
+    } catch (error) {
+      setReservationLoading(false);
+      console.error(error);
+    }
   };
 
   // Fetch to get car info for that specific car
   useEffect(() => {
     fetch(`/cars/${id}`)
       .then((res) => res.json())
-      .then((data) => setCar(data.data))
+      .then((data) => {
+        setCar(data.data);
+        setCarLoading(false);
+      })
       .catch((err) => console.log(err));
   }, [id]);
 
+  if (carLoading) {
+    return (
+      <MiddleScreenLoading>Loading car information...</MiddleScreenLoading>
+    );
+  }
   if (!car) {
-    return <div>Loading...</div>;
+    return (
+      <MiddleScreenLoading>Error fetching car information!</MiddleScreenLoading>
+    );
   }
 
   return (
@@ -74,10 +97,14 @@ const SpecificCar = () => {
         <h2>{car.full}</h2>
         <p>{car.description}</p>
         <p>Daily Rate: ${car.dailyRate}</p>
-        <Calendar range={range} setRange={setRange} />
-        <Link to={`/cars/${car._id}/reserv`} onClick={handleReservation}>
-          <button>Book Now</button>
-        </Link>
+        {reservationLoading ? (
+          <h3>Loading...</h3>
+        ) : (
+          <>
+            <Calendar range={range} setRange={setRange} />
+            <button onClick={handleReservation}>Book Now</button>
+          </>
+        )}
       </Right>
     </Wrapper>
   );
@@ -115,5 +142,7 @@ const Right = styled.div`
   align-items: center;
   margin-right: 200px;
 `;
+
+const MiddleScreenLoading = styled.h1``;
 
 export default SpecificCar;

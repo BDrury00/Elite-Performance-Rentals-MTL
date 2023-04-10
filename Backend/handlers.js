@@ -123,11 +123,51 @@ const createReservation = async (req, res) => {
   }
 };
 
+//get the reservation by its _id
+//get endpoint /reserv/confirm/:_id
+const getReservationById = async (req, res) => {
+  const _id = req.params._id;
+  try {
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const reservationsCollection = await db.collection("reservations");
+
+    const reservationInfo = await reservationsCollection.findOne({
+      _id: _id,
+    });
+    client.close();
+    res.status(200).json({ status: 200, data: reservationInfo });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: "Error fetching reservation by its id." });
+  }
+};
+
 // delete reservation
 const deleteReservation = async (req, res) => {};
 
-// get the users
-const getUsers = async (req, res) => {};
+// get the users reservations by there email.
+// endpoint: /userdata/:userId where userId is the users email address.
+const getUserData = async (req, res) => {
+  const email = req.params.userId;
+  try {
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const reservationsCollection = await db.collection("reservations");
+
+    const usersReservations = await reservationsCollection
+      .find({
+        email: email,
+      })
+      .toArray();
+    client.close();
+    res.status(200).json({ status: 200, data: usersReservations });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ status: 400, message: "Error retrieving users data." });
+  }
+};
 
 // update reservation
 const updateReservation = async (req, res) => {};
@@ -136,8 +176,9 @@ module.exports = {
   getCars,
   getCar,
   getCarAvailability,
-  getUsers,
+  getUserData,
   createReservation,
   updateReservation,
   deleteReservation,
+  getReservationById,
 };
