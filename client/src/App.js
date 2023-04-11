@@ -8,7 +8,6 @@ import Navbar from "./components/navbar/Navbar";
 import Confirmation from "./pages/Confirmation";
 import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle";
-import UserInfo from "./components/login&logout/UserInfo";
 //
 
 //
@@ -24,7 +23,7 @@ const App = () => {
           <Navbar />
         </NavbarContainer>
         <Routes>
-          <Route path="/" element={<UserInfo />} />
+          <Route path="/" element={<Home />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/cars/:id" element={<SpecificCar />} />
           <Route path="/contact" element={<Contact />} />
