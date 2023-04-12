@@ -21,7 +21,6 @@ const cars = [
       "/assets/audi-r8/images/4.jpg",
       "/assets/audi-r8/images/5.jpg",
     ],
-    reservations: [],
   },
   {
     _id: "Countach",
@@ -40,7 +39,6 @@ const cars = [
       "/assets/lamborghini-countach/images/4.jpg",
       "/assets/lamborghini-countach/images/5.jpg",
     ],
-    reservations: [],
   },
   {
     _id: "Urus",
@@ -57,7 +55,6 @@ const cars = [
       "/assets/lamborghini-urus/images/2.jpg",
       "/assets/lamborghini-urus/images/3.jpg",
     ],
-    reservations: [],
   },
   {
     _id: "765LT-Spider",
@@ -74,7 +71,6 @@ const cars = [
       "/assets/mclaren-765LT-spider/images/2.jpg",
       "/assets/mclaren-765LT-spider/images/3.jpg",
     ],
-    reservations: [],
   },
   {
     _id: "SF90-Spider",
@@ -91,7 +87,6 @@ const cars = [
       "/assets/novitec-ferrari-SF90-spider/images/2.jpg",
       "/assets/novitec-ferrari-SF90-spider/images/3.jpg",
     ],
-    reservations: [],
   },
   {
     _id: "Cayman-GTS",
@@ -108,7 +103,6 @@ const cars = [
       "/assets/porsche-cayman-GTS/images/2.jpg",
       "/assets/porsche-cayman-GTS/images/3.jpg",
     ],
-    reservations: [],
   },
 ];
 

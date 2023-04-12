@@ -109,12 +109,6 @@ const createReservation = async (req, res) => {
     const reservationsCollection = await db.collection("reservations");
     await reservationsCollection.insertOne(reservation);
 
-    const carsCollection = await db.collection("cars");
-    await carsCollection.updateOne(
-      { _id: carId },
-      { $push: { reservations: _id } }
-    );
-
     res.status(201).json({
       status: 201,
       message: "Reservation created successfully",
