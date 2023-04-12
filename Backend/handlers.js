@@ -75,8 +75,11 @@ const getCarAvailability = async (req, res) => {
       .toArray();
     client.close();
 
-    // No need to handle if an array of reservations is empty as this just means the car is available at any date
-    res.status(200).json({ status: 200, carId: carId, data: carsReservations });
+    const availability = carsReservations.map((reservation) => {
+      return { startDate: reservation.startDate, endDate: reservation.endDate };
+    });
+
+    res.status(200).json({ status: 200, carId: carId, data: availability });
   } catch (err) {
     res.status(400).json({
       status: 400,
@@ -97,8 +100,8 @@ const createReservation = async (req, res) => {
       _id,
       email,
       carId,
-      startDate: startDate.toLocaleDateString("en-CA"),
-      endDate: endDate.toLocaleDateString("en-CA"),
+      startDate,
+      endDate,
     };
 
     await client.connect();
@@ -144,7 +147,29 @@ const getReservationById = async (req, res) => {
 };
 
 // delete reservation
-const deleteReservation = async (req, res) => {};
+const deleteReservation = async (req, res) => {
+  const reservationId = req.params.reservationId;
+  try {
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const reservationsCollection = await db.collection("reservations");
+    const result = await reservationsCollection.deleteOne({
+      _id: reservationId,
+    });
+    client.close();
+    if (result.deletedCount === 1) {
+      res
+        .status(200)
+        .json({ status: 200, message: "Reservation deleted successfully." });
+    } else {
+      res.status(404).json({ status: 404, message: "Reservation not found." });
+    }
+  } catch (err) {
+    res
+      .status(400)
+      .json({ status: 400, message: "Error deleting reservation." });
+  }
+};
 
 // get the users reservations by there email.
 // endpoint: /userdata/:userId where userId is the users email address.

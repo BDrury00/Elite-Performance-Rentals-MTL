@@ -39,8 +39,9 @@ app.get("/cars/:carId", getCar); // view a specific car
 app.get("/cars/:carId/availability", getCarAvailability); // view a specific cars reservations to figure out availability
 app.post("/cars/:carId/reserv", createReservation); // reserve a specific car
 app.get("/reserv/confirm/:_id", getReservationById); // get the reservations info based on its _id for confirmation page
+app.get("/userdata/:userId", getUserData); // get the users email, name, and all their reservations
 
-app.get("/userdata/:userId", getUserData); // get the users email, name, and all there reservations
+app.delete("/reservations/:reservationId", deleteReservation);
 // add new endpoints here ☝️
 // ---------------------------------
 // Nothing to modify below this line

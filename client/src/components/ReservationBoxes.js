@@ -1,6 +1,28 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-const ReservationBoxes = ({ reservation }) => {
+const ReservationBoxes = ({ reservation, setReservations }) => {
+  // handler for deleting the reservation
+
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = () => {
+    setDeleting(true);
+    fetch(`/reservations/${reservation._id}`, { method: "DELETE" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+        setDeleting(false);
+        // reload the reservations after deletion
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(`Error deleting reservation: ${error.message}`);
+        setDeleting(false);
+      });
+  };
+
   return (
     <Wrapper>
       <ReservationBox>
@@ -8,6 +30,9 @@ const ReservationBoxes = ({ reservation }) => {
         <p>Car: {reservation.carId}</p>
         <p>Start Date: {reservation.startDate}</p>
         <p>End Date: {reservation.endDate}</p>
+        <DeleteButton onClick={handleDelete} disabled={deleting}>
+          {deleting ? "Deleting..." : "Delete"}
+        </DeleteButton>
       </ReservationBox>
     </Wrapper>
   );
@@ -27,5 +52,7 @@ const ReservationBox = styled.div`
   min-width: 800px;
   background-color: lightgrey;
 `;
+
+const DeleteButton = styled.button``;
 
 export default ReservationBoxes;

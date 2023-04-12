@@ -17,6 +17,11 @@ const SpecificCar = () => {
   const [carLoading, setCarLoading] = useState(true);
   const [reservationLoading, setReservationLoading] = useState(false);
 
+  // for calendar reserved days
+  // const [bookedDays, setBookedDays] = useState([]);
+  // const [calendarLoading, setCalendarLoading] = useState(false);
+  // const [calendarClicked, setCalendarClicked] = useState(false);
+
   // For Calendar
   const [range, setRange] = useState([
     {
@@ -60,13 +65,17 @@ const SpecificCar = () => {
 
   // Fetch to get car info for that specific car
   useEffect(() => {
-    fetch(`/cars/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/cars/${id}`);
+        const data = await res.json();
         setCar(data.data);
         setCarLoading(false);
-      })
-      .catch((err) => console.log(err));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, [id]);
 
   if (carLoading) {
@@ -101,7 +110,7 @@ const SpecificCar = () => {
           <h3>Loading...</h3>
         ) : (
           <>
-            <Calendar range={range} setRange={setRange} />
+            <Calendar range={range} setRange={setRange} id={id} />
             <button onClick={handleReservation}>Book Now</button>
           </>
         )}

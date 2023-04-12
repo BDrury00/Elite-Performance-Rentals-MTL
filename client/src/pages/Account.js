@@ -43,6 +43,7 @@ const Account = () => {
               <ReservationBoxes
                 key={reservation._id}
                 reservation={reservation}
+                setReservations={setReservations}
               />
             ))
           ) : (
@@ -62,10 +63,6 @@ const Wrapper = styled.div`
 
 const Name = styled.p`
   margin-top: 0;
-  font-size: 28px;
-`;
-
-const Email = styled.p`
   font-size: 28px;
 `;
 
