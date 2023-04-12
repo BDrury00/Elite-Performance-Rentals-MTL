@@ -21,7 +21,6 @@ const reservationsCollection = async () => {
   try {
     // client.connect();
     const db = client.db("Elite-Performance-Rentals");
-    await db.collection("reservations").drop();
     await db.createCollection("reservations");
 
     console.log("Successfully created reservations collection!");
