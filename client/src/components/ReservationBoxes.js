@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const ReservationBoxes = ({ reservation, setReservations }) => {
+const ReservationBoxes = ({ reservation, setReservations, reservations }) => {
   // handler for deleting the reservation
 
   const [deleting, setDeleting] = useState(false);
@@ -14,8 +14,12 @@ const ReservationBoxes = ({ reservation, setReservations }) => {
           throw new Error(`Error! status: ${response.status}`);
         }
         setDeleting(false);
-        // reload the reservations after deletion
-        window.location.reload();
+        // remove deleted reservation from reservations array
+        const updatedReservations = reservations.filter(
+          (r) => r._id !== reservation._id
+        );
+        // update reservations state
+        setReservations(updatedReservations);
       })
       .catch((error) => {
         console.error(`Error deleting reservation: ${error.message}`);

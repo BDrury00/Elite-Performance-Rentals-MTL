@@ -195,7 +195,36 @@ const getUserData = async (req, res) => {
 };
 
 // update reservation
-const updateReservation = async (req, res) => {};
+// endpoint: app.patch("/reservations/:reservationId", updateReservation);
+const updateReservation = async (req, res) => {
+  const reservationId = req.params.reservationId;
+  const { startDate, endDate } = req.body;
+
+  try {
+    await client.connect();
+    const db = client.db("Elite-Performance-Rentals");
+    const reservationsCollection = await db.collection("reservations");
+
+    const result = await reservationsCollection.updateOne(
+      { _id: reservationId },
+      { $set: { startDate: new Date(startDate), endDate: new Date(endDate) } }
+    );
+
+    client.close();
+
+    if (result.modifiedCount === 1) {
+      res
+        .status(200)
+        .json({ status: 200, message: "Reservation updated successfully." });
+    } else {
+      res.status(404).json({ status: 404, message: "Reservation not found." });
+    }
+  } catch (err) {
+    res
+      .status(400)
+      .json({ status: 400, message: "Error updating reservation." });
+  }
+};
 
 module.exports = {
   getCars,

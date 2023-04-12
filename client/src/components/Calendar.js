@@ -1,6 +1,6 @@
 import { DateRange } from "react-date-range";
 import format from "date-fns/format";
-import { addDays, parse, eachDayOfInterval, isValid } from "date-fns";
+import { addDays, eachDayOfInterval } from "date-fns";
 import { useEffect, useState, useRef } from "react";
 
 // css files to make the Calendar work
@@ -89,7 +89,7 @@ const Calendar = ({ range, setRange, id }) => {
                 months={1}
                 direction="vertical"
                 className="calendarElement"
-                minDate={new Date()} // find a way to change the min date dynamically based on the latest date in the mongoDb reservation collection
+                minDate={new Date()}
                 disabledDates={disabledDates}
                 maxDate={maxEndDate}
               />

@@ -44,6 +44,7 @@ const Account = () => {
                 key={reservation._id}
                 reservation={reservation}
                 setReservations={setReservations}
+                reservations={reservations}
               />
             ))
           ) : (
