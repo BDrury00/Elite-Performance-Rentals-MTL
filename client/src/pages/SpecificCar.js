@@ -34,7 +34,7 @@ const SpecificCar = () => {
 
   //
   // get auth0 users credentials:
-  const { user } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   //
   // handler for reservations:
@@ -111,7 +111,11 @@ const SpecificCar = () => {
         ) : (
           <>
             <Calendar range={range} setRange={setRange} id={id} />
-            <BookButton onClick={handleReservation}>Book Now</BookButton>
+            {isAuthenticated ? (
+              <BookButton onClick={handleReservation}>Book Now</BookButton>
+            ) : (
+              <p>Must be signed in to make a reservation</p>
+            )}
           </>
         )}
       </Right>

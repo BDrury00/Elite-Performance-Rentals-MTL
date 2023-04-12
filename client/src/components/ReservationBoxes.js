@@ -93,13 +93,18 @@ const ReservationBoxes = ({
         {editing ? (
           <UpdateWrapper>
             <Calendar4Update range={range} setRange={setRange} carId={carId} />
-            <button onClick={handleUpdate} disabled={reservationUpdateLoading}>
+            <UpdateButton
+              onClick={handleUpdate}
+              disabled={reservationUpdateLoading}
+            >
               {reservationUpdateLoading ? "Updating..." : "Update"}
-            </button>
-            <button onClick={() => setEditing(false)}>Done</button>
+            </UpdateButton>
+            <DoneEditButton onClick={() => setEditing(false)}>
+              Done
+            </DoneEditButton>
           </UpdateWrapper>
         ) : (
-          <button onClick={() => setEditing(true)}>Edit</button>
+          <DoneEditButton onClick={() => setEditing(true)}>Edit</DoneEditButton>
         )}
       </ReservationBox>
     </Wrapper>
@@ -123,6 +128,46 @@ const ReservationBox = styled.div`
 
 const UpdateWrapper = styled.div``;
 
-const DeleteButton = styled.button``;
+const DoneEditButton = styled.button`
+  background-color: #0ec208;
+  color: white;
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  border: none;
+
+  &:hover {
+    background-color: green;
+  }
+`;
+
+const UpdateButton = styled.button`
+  background-color: blue;
+  color: white;
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  border: none;
+
+  &:hover {
+    background-color: #0871c2;
+  }
+`;
+
+const DeleteButton = styled.button`
+  background-color: red;
+  color: white;
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  border: none;
+
+  &:hover {
+    background-color: darkred;
+  }
+`;
 
 export default ReservationBoxes;
