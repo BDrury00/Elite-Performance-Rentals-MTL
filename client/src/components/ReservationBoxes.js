@@ -1,11 +1,30 @@
 import styled from "styled-components";
 import { useState } from "react";
+import Calendar4Update from "./Calendar4Update";
+import format from "date-fns/format";
 
-const ReservationBoxes = ({ reservation, setReservations, reservations }) => {
-  // handler for deleting the reservation
+const ReservationBoxes = ({
+  reservation,
+  setReservations,
+  reservations,
+  carId,
+}) => {
+  const [editing, setEditing] = useState(false);
+  // For Calendar
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [reservationUpdateLoading, setReservationUpdateLoading] =
+    useState(false);
 
   const [deleting, setDeleting] = useState(false);
 
+  // handler for deleting the reservation
   const handleDelete = () => {
     setDeleting(true);
     fetch(`/reservations/${reservation._id}`, { method: "DELETE" })
@@ -27,16 +46,61 @@ const ReservationBoxes = ({ reservation, setReservations, reservations }) => {
       });
   };
 
+  // handler for updating the reservation
+  const handleUpdate = async () => {
+    setReservationUpdateLoading(true);
+    try {
+      const response = await fetch(`/reservations/${reservation._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          startDate: range[0].startDate,
+          endDate: range[0].endDate,
+        }),
+      });
+      const data = await response.json();
+      setReservationUpdateLoading(false);
+      const updatedReservation = data.data;
+      const updatedReservations = reservations.map((r) =>
+        r._id === updatedReservation._id ? updatedReservation : r
+      );
+      setReservations(updatedReservations);
+      setEditing(false);
+    } catch (error) {
+      setReservationUpdateLoading(false);
+      console.error(error);
+    }
+  };
+
   return (
     <Wrapper>
-      <ReservationBox>
+      <ReservationBox key={reservation._id}>
         <p>Reservation Id: {reservation._id}</p>
         <p>Car: {reservation.carId}</p>
-        <p>Start Date: {reservation.startDate}</p>
-        <p>End Date: {reservation.endDate}</p>
+        <p>
+          Start Date:{" "}
+          {format(new Date(reservation.startDate), "EEEE, MMMM d, yyyy")}
+        </p>
+        <p>
+          End Date:{" "}
+          {format(new Date(reservation.endDate), "EEEE, MMMM d, yyyy")}
+        </p>
         <DeleteButton onClick={handleDelete} disabled={deleting}>
           {deleting ? "Deleting..." : "Delete"}
         </DeleteButton>
+        {editing ? (
+          <UpdateWrapper>
+            <Calendar4Update range={range} setRange={setRange} carId={carId} />
+            <button onClick={handleUpdate} disabled={reservationUpdateLoading}>
+              {reservationUpdateLoading ? "Updating..." : "Update"}
+            </button>
+            <button onClick={() => setEditing(false)}>Done</button>
+          </UpdateWrapper>
+        ) : (
+          <button onClick={() => setEditing(true)}>Edit</button>
+        )}
       </ReservationBox>
     </Wrapper>
   );
@@ -56,6 +120,8 @@ const ReservationBox = styled.div`
   min-width: 800px;
   background-color: lightgrey;
 `;
+
+const UpdateWrapper = styled.div``;
 
 const DeleteButton = styled.button``;
 

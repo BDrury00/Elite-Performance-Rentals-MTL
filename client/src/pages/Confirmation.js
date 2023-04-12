@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import format from "date-fns/format";
 
 const Confirmation = () => {
   const [confirmInfo, setConfirmInfo] = useState(null);
@@ -36,8 +37,14 @@ const Confirmation = () => {
         <p>Email: {confirmInfo.email}</p>
         <p>Car: {confirmInfo.carId}</p>
         <p>
-          From: <Bold>{confirmInfo.startDate}</Bold> to{" "}
-          <Bold>{confirmInfo.endDate}</Bold>
+          From:{" "}
+          <Bold>
+            {format(new Date(confirmInfo.startDate), "EEEE, MMMM d, yyyy")}
+          </Bold>{" "}
+          to{" "}
+          <Bold>
+            {format(new Date(confirmInfo.endDate), "EEEE, MMMM d, yyyy")}
+          </Bold>
         </p>
       </Info>
     </Wrapper>
