@@ -74,6 +74,7 @@ const TopRight = styled.div`
 
 const TextWrap = styled.div`
   color: black;
+  font-size: 19.5px;
 `;
 
 export default Home;
