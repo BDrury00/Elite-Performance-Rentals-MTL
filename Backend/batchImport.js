@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { cars, reservations, users } = require("./data.js");
+const { cars } = require("./data.js");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
@@ -17,30 +17,16 @@ const carsData = async () => {
   }
 };
 
-const reservationsData = async () => {
+const reservationsCollection = async () => {
   try {
     // client.connect();
     const db = client.db("Elite-Performance-Rentals");
-    const reservationCollection = await db
-      .collection("reservations")
-      .insertMany(reservations);
-    console.log(
-      "Successfully imported reservation data to reservation collection!"
-    );
-    // client.close();
-  } catch (err) {
-    console.log("Error importing reservation data:", err.message);
-  }
-};
+    await db.collection("reservations").drop();
+    await db.createCollection("reservations");
 
-const userData = async () => {
-  try {
-    // client.connect();
-    const db = client.db("Elite-Performance-Rentals");
-    const userCollection = await db.collection("users").insertMany(users);
-    console.log("Succesfully imported user data to user data collection!");
+    console.log("Successfully created reservations collection!");
   } catch (err) {
-    console.log("Error importing user data:", err.message);
+    console.log("Error creating reservations collection:", err.message);
   }
 };
 
@@ -50,8 +36,7 @@ const importData = async () => {
   try {
     await client.connect();
     await carsData();
-    await reservationsData();
-    await userData();
+    await reservationsCollection();
     await client.close();
   } catch (err) {
     console.log("Error importing data:", err);

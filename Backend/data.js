@@ -91,7 +91,7 @@ const cars = [
       "/assets/novitec-ferrari-SF90-spider/images/2.jpg",
       "/assets/novitec-ferrari-SF90-spider/images/3.jpg",
     ],
-    reservations: ["4d5c5719-fec1-45b6-8586-9720dc51499d"],
+    reservations: [],
   },
   {
     _id: "Cayman-GTS",
@@ -108,85 +108,10 @@ const cars = [
       "/assets/porsche-cayman-GTS/images/2.jpg",
       "/assets/porsche-cayman-GTS/images/3.jpg",
     ],
-    reservations: [
-      "849ca5da-f812-4e30-93eb-7c56555b22ef",
-      "88847120-f011-48e8-9b34-b6588cf9b919",
-    ],
-  },
-];
-
-// reservation data
-const reservations = [
-  {
-    _id: "849ca5da-f812-4e30-93eb-7c56555b22ef",
-    userId: "luca@gmail.com",
-    carId: "Cayman-GTS",
-    startDate: {
-      day: 1,
-      month: 4,
-      year: 2023,
-    },
-    endDate: {
-      day: 6,
-      month: 4,
-      year: 2023,
-    },
-  },
-  {
-    _id: "88847120-f011-48e8-9b34-b6588cf9b919",
-    userId: "coolGuy@gmail.com",
-    carId: "Cayman-GTS",
-    startDate: {
-      day: 7,
-      month: 4,
-      year: 2023,
-    },
-    endDate: {
-      day: 16,
-      month: 4,
-      year: 2023,
-    },
-  },
-  {
-    _id: "4d5c5719-fec1-45b6-8586-9720dc51499d",
-    userId: "coolGuy@gmail.com",
-    carId: "SF90-Spider",
-    startDate: {
-      day: 7,
-      month: 4,
-      year: 2023,
-    },
-    endDate: {
-      day: 16,
-      month: 4,
-      year: 2023,
-    },
-  },
-];
-
-// user data
-const users = [
-  {
-    _id: "luca@gmail.com",
-    firstName: "Luca",
-    lastName: "Guy",
-    email: "luca@gmail.com",
-    password: "secretPassWord123",
-    reservations: ["849ca5da-f812-4e30-93eb-7c56555b22ef"],
-  },
-  {
-    _id: "coolGuy@gmail.com",
-    firstName: "Cool",
-    lastName: "Guy",
-    email: "coolGuy@gmail.com",
-    password: "secretPassWord123",
-    reservations: [
-      "88847120-f011-48e8-9b34-b6588cf9b919",
-      "4d5c5719-fec1-45b6-8586-9720dc51499d",
-    ],
+    reservations: [],
   },
 ];
 
 //exports
 
-module.exports = { cars, reservations, users };
+module.exports = { cars };

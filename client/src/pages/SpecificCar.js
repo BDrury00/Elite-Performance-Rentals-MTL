@@ -111,7 +111,7 @@ const SpecificCar = () => {
         ) : (
           <>
             <Calendar range={range} setRange={setRange} id={id} />
-            <button onClick={handleReservation}>Book Now</button>
+            <BookButton onClick={handleReservation}>Book Now</BookButton>
           </>
         )}
       </Right>
@@ -123,6 +123,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: black;
 `;
 
 //
@@ -150,6 +151,22 @@ const Right = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 200px;
+`;
+
+const BookButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #0062cc;
+  }
 `;
 
 const MiddleScreenLoading = styled.h1``;

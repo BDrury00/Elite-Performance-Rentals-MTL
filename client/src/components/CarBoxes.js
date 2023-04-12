@@ -1,11 +1,24 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const CarBoxes = ({ car }) => {
+  const [loading, setLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <CarBoxWrapper>
+      {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
       <CarImgContainer>
-        <CarImg src={car.cutoutImage} alt={car.make} />
+        <CarImg
+          src={car.cutoutImage}
+          alt={car.make}
+          onLoad={handleImageLoad}
+          hidden={loading}
+        />
       </CarImgContainer>
       <InfoUnderJpg>
         <h2>{car.full}</h2>
@@ -73,6 +86,13 @@ const InfoButton = styled.button`
     cursor: pointer;
     background-color: #0069d9;
   }
+`;
+
+const LoadingIndicator = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export default CarBoxes;
