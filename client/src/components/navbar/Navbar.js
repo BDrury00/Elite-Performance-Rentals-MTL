@@ -58,6 +58,8 @@ const Nav = styled.nav`
   padding: 30px;
   border: 2px solid black;
   border-radius: 10px;
+  position: relative;
+  z-index: 9999;
 `;
 
 export default Navbar;

@@ -27,7 +27,8 @@ body {
   hsl(344deg 0% 14%) 70%,
   hsl(0deg 0% 4%) 100%
 );
-min-height: 100vh;
+min-height: 125vh;
+
 }
 
 `;
